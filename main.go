@@ -46,14 +46,14 @@ func main() {
 		log.Fatal(error)
 	}
 
-	rf := resize.Resize(60, 0, img, resize.Lanczos3)
+	rf := resize.Resize(60, 60, img, resize.NearestNeighbor)
 	for i := 0; i < rf.Bounds().Dx(); i++ {
 		for j := 0; j < rf.Bounds().Dy(); j++ {
 			r, g, b, _ := rf.At(j, i).RGBA()
 			br := int(r>>8+g>>8+b>>8) / 3
-			brm := Map(br, 0, 255, 0, 9)
+			brm := Map(br, 0, 255, 0, 8)
 			pixels = append(pixels, brm)
-			fmt.Print(string(density[brm]))
+			fmt.Print(string(density[brm]), string(density[brm]))
 		}
 		fmt.Print("\n")
 	}
