@@ -1,0 +1,3 @@
+- [x] Load image
+- [x] Pixelate image
+- [ ] Grayscale?
