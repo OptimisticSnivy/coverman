@@ -36,7 +36,7 @@ func main() {
 
 	filepath.WalkDir(arg[0], walk)
 
-	f, err := os.Open(files[3])
+	f, err := os.Open(files[1])
 	if err != nil {
 		log.Fatal(err)
 	}
