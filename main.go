@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/gookit/color"
 	"github.com/nfnt/resize"
 )
 
@@ -36,7 +37,7 @@ func main() {
 
 	filepath.WalkDir(arg[0], walk)
 
-	f, err := os.Open(files[1])
+	f, err := os.Open(files[3])
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,14 +47,14 @@ func main() {
 		log.Fatal(error)
 	}
 
-	rf := resize.Resize(60, 60, img, resize.NearestNeighbor)
+	rf := resize.Resize(50, 50, img, resize.NearestNeighbor)
 	for i := 0; i < rf.Bounds().Dx(); i++ {
 		for j := 0; j < rf.Bounds().Dy(); j++ {
 			r, g, b, _ := rf.At(j, i).RGBA()
 			br := int(r>>8+g>>8+b>>8) / 3
 			brm := Map(br, 0, 255, 0, 8)
 			pixels = append(pixels, brm)
-			fmt.Print(string(density[brm]), string(density[brm]))
+			color.RGB(uint8(r>>8), uint8(g>>8), uint8(b>>8)).Print(string(density[brm]), string(density[brm]))
 		}
 		fmt.Print("\n")
 	}
